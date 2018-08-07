@@ -42,6 +42,10 @@ public class FileUtils {
     return sb.toString();
   }
 
+  public static void writeFile(String filename, Object content) {
+    writeFile(filename, content, false);
+  }
+
   public static void writeFile(String filename, Object content, boolean doAppend) {
     File file = new File(filename);
     BufferedWriter bw = null;
