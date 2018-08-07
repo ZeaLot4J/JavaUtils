@@ -11,11 +11,11 @@ import java.io.IOException;
 /** File utils to conveniently read and write with files using character stream */
 public class FileUtils {
   public static void main(String[] args) {
-    String path =
-        File.separator + "root" + File.separator + ".emacs.d" + File.separator + "test.txt";
+    String path = System.getProperty("user.dir") + File.separator + "pom.xml";
     File file = new File(path);
-    //    String result = readFile(path);
-    writeFile(path, " Lancelot", true);
+    String result = readFile(path);
+    System.out.println(result);
+    //    writeFile(path, " Lancelot", true);
   }
 
   public static String readFile(String filename) {
