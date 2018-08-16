@@ -6,11 +6,13 @@ import java.io.File;
 import org.junit.*;
 
 public class FileUtilsTest {
+
   @Test
   public void readFileTest() {
     String filePath = System.getProperty("user.dir") + File.separator + "README.md";
     String actualResult = FileUtils.readFile(filePath);
-    String expectedResult = "# JavaUtils";
+    System.out.println(actualResult);
+    String expectedResult = "# JavaUtilsjava7 self-defined utils.";
     assertEquals(expectedResult, actualResult);
   }
 
