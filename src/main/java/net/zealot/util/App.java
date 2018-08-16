@@ -1,16 +1,30 @@
 package net.zealot.util;
 
+import org.apache.log4j.Logger;
+
 /** Hello world! */
 public class App {
+  // public static void main(String[] args) {
+  //   Person p1 = Person.INSTANCE;
+  //   Person p2 = Person.INSTANCE;
+  //   //    p1.setFirstName("ZeaLOt");
+  //   //    p1.setLastName("Lancelot");
+  //   //    p1.setAge(23);
+  //   System.out.println(p1 == p2);
+  //   System.out.println(p1);
+  //   System.out.println(p2);
+  // }
+  private String field = "default";
+
+  public static Object func() {
+    App app = new App();
+    return app.field;
+  }
+
+  public static final Logger logger = Logger.getLogger(App.class);
+
   public static void main(String[] args) {
-    Person p1 = Person.INSTANCE;
-    Person p2 = Person.INSTANCE;
-    //    p1.setFirstName("ZeaLOt");
-    //    p1.setLastName("Lancelot");
-    //    p1.setAge(23);
-    System.out.println(p1 == p2);
-    System.out.println(p1);
-    System.out.println(p2);
+    System.out.println(App.func());
   }
 }
 

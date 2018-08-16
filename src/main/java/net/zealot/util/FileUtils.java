@@ -3,7 +3,6 @@ package net.zealot.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,28 +10,21 @@ import java.io.IOException;
 /** File utils to conveniently read and write with files using character stream */
 public class FileUtils {
   public static void main(String[] args) {
-    String path = System.getProperty("user.dir") + File.separator + "pom.xml";
-    File file = new File(path);
-    String result = readFile(path);
-    System.out.println(result);
-    //    writeFile(path, " Lancelot", true);
+    String dir = System.getProperty("user.dir");
+    File dest = new File(dir, "pom.xml");
+    File origin = new File(dir, "pom.gz");
   }
 
+  private static int DEFAULT_BUFFER_SIZE = 1024;
+
   public static String readFile(String filename) {
-    File file = new File(filename);
-    if (!file.exists()) {
-      try {
-        throw new FileNotFoundException("file " + filename + " not found.");
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    if (!file.isFile()) {
-      throw new RuntimeException("file " + filename + " is not a file.");
-    }
+    return readFile(new File(filename));
+  }
+
+  public static String readFile(File file) {
     StringBuilder sb = new StringBuilder();
     String line = null;
-    try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
       while ((line = br.readLine()) != null) {
         sb.append(line);
       }
@@ -43,11 +35,14 @@ public class FileUtils {
   }
 
   public static void writeFile(String filename, Object content) {
-    writeFile(filename, content, false);
+    writeFile(new File(filename), content, false);
   }
 
-  public static void writeFile(String filename, Object content, boolean doAppend) {
-    File file = new File(filename);
+  public static void writeFile(File file, Object content) {
+    writeFile(file, content, false);
+  }
+
+  public static void writeFile(File file, Object content, boolean doAppend) {
     BufferedWriter bw = null;
     try {
       if (!file.exists()) {
